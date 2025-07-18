@@ -3,6 +3,7 @@
 
 import { sql } from "drizzle-orm";
 import { index, pgTableCreator } from "drizzle-orm/pg-core";
+import { Agent } from "http";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -12,16 +13,18 @@ import { index, pgTableCreator } from "drizzle-orm/pg-core";
  */
 export const createTable = pgTableCreator((name) => `ipt-project_${name}`);
 
-export const posts = createTable(
-  "post",
+export const users = createTable(
+  "user",
   (d) => ({
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
     name: d.varchar({ length: 256 }),
+    Age: d.varchar({ length: 256 }),
+    email: d.varchar({ length: 256 }).unique(),
     createdAt: d
       .timestamp({ withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
   }),
-  (t) => [index("name_idx").on(t.name)],
+  // (t) => [index("name_idx").on(t.name)],
 );
