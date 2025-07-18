@@ -11,7 +11,6 @@ interface User {
   updatedAt: Date | null;
 }
 
-
 export default function HomePage() {
   const [users, setUsers] = useState<User[]>([]);
 
@@ -23,7 +22,7 @@ export default function HomePage() {
           throw new Error("Network response was not ok");
         }
 
-        const data: User[] = await response.json(); // ✅ FIXED HERE
+        const data = (await response.json()) as User[];
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
