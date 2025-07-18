@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 
 // ✅ Correctly named interface
 interface User {
-  id: number;
-  name: string;
-  age: string;
-  email: string;
-  createdAt: Date;
-  updatedAt: Date;
+  id: number | null;
+  name: string | null;
+  age: string  | null;
+  email: string | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 }
 
 export default function HomePage() {
