@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 
 interface User {
-  id: number;
-  name: string;
-  age: string;
-  email: string;
-  createdAt: Date;
-  updatedAt: Date;
+  id: number | null;
+  name: string | null;
+  age: string | null;
+  email: string | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 }
+
 
 export default function HomePage() {
   const [users, setUsers] = useState<User[]>([]);
@@ -22,14 +23,14 @@ export default function HomePage() {
           throw new Error("Network response was not ok");
         }
 
-        const data: User[] = await response.json();
+        const data: User[] = await response.json(); // ✅ FIXED HERE
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     }
 
-    void fetchUsers(); // ✅ fixed floating promise error
+    void fetchUsers();
   }, []);
 
   return (
